@@ -23,8 +23,7 @@ QDRANT_URL = os.getenv("QDRANT_URL", "YOUR_QDRANT_URL")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY", "YOUR_QDRANT_API_KEY")
 COLLECTION_NAME = "Hollywood_movies"
 
-# Initialize FastEmbed model globally so it doesn't reload on every single request
-embedding_model = TextEmbedding()
+embedding_model = TextEmbedding(cache_dir="/tmp/fastembed_cache")
 
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
