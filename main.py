@@ -1,4 +1,5 @@
 import os
+import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI, Request, Query
 from fastapi.responses import HTMLResponse
@@ -84,6 +85,9 @@ async def search_vibes(request: Request, q: str = Query(..., description="Search
         }
     )
 
+@app.get("/api/health")
+async def health_check():
+    return {"message": "Movie Vibes Finder API in FastAPI"}
+
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
